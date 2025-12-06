@@ -1,0 +1,5 @@
+{
+  "name": "MatchPro AI",
+  "description": "An intelligent resume parsing and job fit prediction tool powered by Gemini. Upload your resume and job description to get instant ATS scoring and optimization advice.",
+  "requestFramePermissions": []
+}
