@@ -100,10 +100,10 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onAnalyze, isAnalyzing })
       {/* Left: Resume Upload */}
       <div className="flex flex-col space-y-4">
         <div className="flex items-center space-x-2 mb-2">
-          <div className="bg-blue-100 p-1.5 rounded-md">
-            <Upload className="w-5 h-5 text-blue-600" />
+          <div className="bg-blue-100 dark:bg-blue-900/30 p-1.5 rounded-md">
+            <Upload className="w-5 h-5 text-blue-600 dark:text-blue-400" />
           </div>
-          <h2 className="text-lg font-semibold text-slate-800">1. Upload Resume</h2>
+          <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100">1. Upload Resume</h2>
         </div>
         
         <div 
@@ -112,18 +112,22 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onAnalyze, isAnalyzing })
           onDrop={handleDrop}
           className={`
             border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center text-center transition-all h-64 cursor-pointer relative
-            ${isDragging ? 'border-blue-500 bg-blue-50 scale-[1.02]' : file ? 'border-blue-300 bg-blue-50' : 'border-slate-300 hover:border-blue-400 bg-white hover:bg-slate-50'}
+            ${isDragging 
+              ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/10 scale-[1.02]' 
+              : file 
+                ? 'border-blue-300 bg-blue-50 dark:bg-blue-900/10 dark:border-blue-800' 
+                : 'border-slate-300 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/80'}
           `}
         >
           {!file ? (
             <>
-              <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 transition-colors ${isDragging ? 'bg-blue-200' : 'bg-blue-100'}`}>
-                <FileText className={`w-8 h-8 ${isDragging ? 'text-blue-700' : 'text-blue-600'}`} />
+              <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 transition-colors ${isDragging ? 'bg-blue-200' : 'bg-blue-100 dark:bg-slate-700'}`}>
+                <FileText className={`w-8 h-8 ${isDragging ? 'text-blue-700' : 'text-blue-600 dark:text-blue-400'}`} />
               </div>
-              <p className="text-slate-600 font-medium mb-2">
+              <p className="text-slate-600 dark:text-slate-300 font-medium mb-2">
                 {isDragging ? "Drop file here" : "Click or drag to upload resume"}
               </p>
-              <p className="text-slate-400 text-sm mb-4">PDF or TXT (Max 5MB)</p>
+              <p className="text-slate-400 dark:text-slate-500 text-sm mb-4">PDF or TXT (Max 5MB)</p>
               <input
                 ref={fileInputRef}
                 type="file"
@@ -135,14 +139,14 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onAnalyze, isAnalyzing })
             </>
           ) : (
             <div className="w-full flex flex-col items-center animate-fadeIn z-10">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                <FileText className="w-8 h-8 text-green-600" />
+              <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mb-4">
+                <FileText className="w-8 h-8 text-green-600 dark:text-green-400" />
               </div>
-              <p className="text-slate-800 font-semibold text-lg truncate max-w-xs">{file.name}</p>
-              <p className="text-slate-500 text-sm mb-6">Ready for analysis</p>
+              <p className="text-slate-800 dark:text-slate-200 font-semibold text-lg truncate max-w-xs">{file.name}</p>
+              <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">Ready for analysis</p>
               <button 
                 onClick={(e) => { e.stopPropagation(); clearFile(); }}
-                className="flex items-center space-x-1 text-red-500 hover:text-red-700 font-medium transition-colors bg-white px-3 py-1.5 rounded-full border border-red-100 shadow-sm hover:shadow"
+                className="flex items-center space-x-1 text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium transition-colors bg-white dark:bg-slate-800 px-3 py-1.5 rounded-full border border-red-100 dark:border-red-900/30 shadow-sm hover:shadow"
               >
                 <X className="w-4 h-4" />
                 <span>Remove File</span>
@@ -155,10 +159,10 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onAnalyze, isAnalyzing })
       {/* Right: Job Description */}
       <div className="flex flex-col space-y-4">
         <div className="flex items-center space-x-2 mb-2">
-           <div className="bg-purple-100 p-1.5 rounded-md">
-            <Briefcase className="w-5 h-5 text-purple-600" />
+           <div className="bg-purple-100 dark:bg-purple-900/30 p-1.5 rounded-md">
+            <Briefcase className="w-5 h-5 text-purple-600 dark:text-purple-400" />
           </div>
-          <h2 className="text-lg font-semibold text-slate-800">2. Job Description</h2>
+          <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100">2. Job Description</h2>
         </div>
 
         <div className="relative h-64">
@@ -166,7 +170,7 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onAnalyze, isAnalyzing })
             value={jobDescription}
             onChange={(e) => setJobDescription(e.target.value)}
             placeholder="Paste the full job description here (responsibilities, requirements, skills)..."
-            className="w-full h-full p-4 rounded-xl border border-slate-700 bg-slate-900 focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none text-slate-100 placeholder-slate-400 text-sm leading-relaxed shadow-sm transition-all"
+            className="w-full h-full p-4 rounded-xl border border-slate-700 bg-slate-900 dark:bg-slate-950 focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none text-slate-100 placeholder-slate-400 text-sm leading-relaxed shadow-sm transition-all"
           />
         </div>
       </div>
@@ -174,7 +178,7 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onAnalyze, isAnalyzing })
       {/* Action Area */}
       <div className="lg:col-span-2 flex flex-col items-center space-y-4 mt-4">
         {error && (
-          <div className="flex items-center space-x-2 text-red-600 bg-red-50 px-4 py-2 rounded-lg border border-red-100 animate-pulse">
+          <div className="flex items-center space-x-2 text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 px-4 py-2 rounded-lg border border-red-100 dark:border-red-900/30 animate-pulse">
             <AlertCircle className="w-5 h-5" />
             <span className="text-sm font-medium">{error}</span>
           </div>
@@ -186,7 +190,7 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onAnalyze, isAnalyzing })
           className={`
             w-full md:w-auto md:min-w-[300px] py-4 px-8 rounded-full font-bold text-lg shadow-lg transform transition-all duration-200
             ${isAnalyzing || !file || !jobDescription 
-              ? 'bg-slate-200 text-slate-400 cursor-not-allowed' 
+              ? 'bg-slate-200 dark:bg-slate-700 text-slate-400 dark:text-slate-500 cursor-not-allowed' 
               : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-xl hover:-translate-y-1 active:scale-95'}
           `}
         >
